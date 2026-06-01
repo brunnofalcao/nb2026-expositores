@@ -57,6 +57,8 @@ section{padding:80px 0}
 .pinc{margin-top:16px;padding-top:14px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:5px}
 .pinc li{list-style:none;font-size:12px;color:var(--t3);display:flex;align-items:center;gap:8px}
 .pinc li::before{content:'✓';color:var(--green);font-size:11px;font-weight:700}
+.booth-photo{margin:-28px -24px 20px;aspect-ratio:4/3;background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;overflow:hidden}
+.booth-photo img{width:100%;height:100%;object-fit:cover;display:block}
 
 .step-badge{display:flex;align-items:center;gap:14px;margin-bottom:24px}
 .step-num{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:22px;flex-shrink:0}
@@ -205,10 +207,10 @@ section{padding:80px 0}
     {size:'36m²',dims:'6 × 6m',m2:36}
   ];
   var BUILDER=[
-    {size:'4m²',dims:'2 × 2m',price:2200,type:'p'},
-    {size:'9m²',dims:'3 × 3m',price:4950,type:'p',pop:true},
-    {size:'12m²',dims:'3 × 4m',price:6600,type:'p'},
-    {size:'18m²',dims:'3 × 6m',price:9900,type:'p'},
+    {size:'4m²',dims:'2 × 2m',price:2200,type:'p',photo:'https://res.cloudinary.com/dlzrfhwin/image/upload/v1780350532/Stand_9-1m_2026_thk2cl.png'},
+    {size:'9m²',dims:'3 × 3m',price:4950,type:'p',pop:true,photo:'https://res.cloudinary.com/dlzrfhwin/image/upload/v1780350532/Stand_9m_2026_emndkj.png'},
+    {size:'12m²',dims:'3 × 4m',price:6600,type:'p',photo:'https://res.cloudinary.com/dlzrfhwin/image/upload/v1780350532/Stand_12m_2026_ntqzs8.png'},
+    {size:'18m²',dims:'3 × 6m',price:9900,type:'p',photo:'https://res.cloudinary.com/dlzrfhwin/image/upload/v1780350532/Stand_v2_18m_2026_javmtf.png'},
     {size:'24m²',dims:'6 × 4m',price:19800,type:'e'},
     {size:'36m²',dims:'6 × 6m',price:29700,type:'e'}
   ];
@@ -238,9 +240,14 @@ section{padding:80px 0}
     for(var i=0;i<BUILDER.length;i++){
       var b=BUILDER[i],isP=b.type==='p';
       h+='<div class="pc'+(b.pop?' pop':'')+'">';
-      h+='<div style="margin:-28px -24px 20px;aspect-ratio:4/3;background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px" id="booth-photo-'+i+'">';
-      h+='<span style="font-size:28px;opacity:0.2">📷</span>';
-      h+='<span style="font-size:11px;color:var(--t4)">Modelo '+b.size+'</span></div>';
+      h+='<div class="booth-photo">';
+      if(b.photo){
+        h+='<img src="'+b.photo+'" alt="Estande modelo '+b.size+'" loading="lazy">';
+      } else {
+        h+='<span style="font-size:28px;opacity:0.2">📷</span>';
+        h+='<span style="font-size:11px;color:var(--t4)">Modelo '+b.size+'</span>';
+      }
+      h+='</div>';
       h+='<div class="psize">'+b.size+'</div>';
       h+='<div class="pdims">'+b.dims+' · '+(isP?'estande padrão':'montagem especial')+'</div>';
       h+='<div class="pcur" style="color:var(--nude);margin-top:16px">'+fmt(b.price)+'</div>';
@@ -287,4 +294,4 @@ section{padding:80px 0}
 })();
 </script>
 </body>
-</html>  
+</html>
